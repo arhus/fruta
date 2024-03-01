@@ -31,7 +31,16 @@ struct FrutaAppClip: App {
         else {
             return
         }
-        
+
+        guard let sharedUserDefaults = UserDefaults(suiteName: "group.example.fruta.DEW5E8B52S") else {
+            // Error handling
+            fatalError()
+        }
+
+        if let campaignId = queryItems.first(where: { $0.name == "c"})?.value {
+            sharedUserDefaults.set(campaignId, forKey: "campaignId")
+        }
+
         if let smoothieID = queryItems.first(where: { $0.name == "smoothie" })?.value {
             model.selectedSmoothieID = smoothieID
         }

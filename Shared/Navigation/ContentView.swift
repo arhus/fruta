@@ -13,15 +13,17 @@ struct ContentView: View {
     #endif
     
     var body: some View {
-        #if os(iOS)
-        if horizontalSizeClass == .compact {
-            AppTabNavigation()
-        } else {
-            AppSidebarNavigation()
+        VStack {
+            Text(self.getSharedValue())
         }
-        #else
-        AppSidebarNavigation()
-        #endif
+    }
+
+    private func getSharedValue() -> String {
+        guard let sharedUserDefaults = UserDefaults(suiteName: "group.example.fruta.DEW5E8B52S") else {
+            return "N/A"
+        }
+        guard let migratedData = sharedUserDefaults.string(forKey: "campaignId") else { return "N/A" }
+        return migratedData
     }
 }
 
